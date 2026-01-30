@@ -14,4 +14,5 @@ export const MessageStyled = styled(Paper)<MessageStyledProps>(({ theme, isSelf 
 	padding: theme.spacing(2),
 	backgroundColor: isSelf ? COLORS.yellow : undefined,
 	border: `1px solid ${COLORS.grey}`,
+	alignSelf: isSelf ? 'flex-end' : undefined,
 }));

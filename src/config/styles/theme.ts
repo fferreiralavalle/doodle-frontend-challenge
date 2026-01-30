@@ -35,6 +35,32 @@ export const componentStyles: ThemeOptions['components'] = {
       },
     },
   },
+  MuiTextField: {
+      styleOverrides: {
+        root: {
+          backgroundColor: COLORS.white,
+		  borderRadius: 4,
+		  '.MuiInputBase-input': {
+		  	borderRadius: 4,
+		  }
+        },
+      },
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        notchedOutline: {
+          borderColor: COLORS.black,
+        },
+        root: {
+          '&:hover .MuiOutlinedInput-notchedOutline': {
+            borderColor: COLORS.black,
+          },
+          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+            borderColor: COLORS.black,
+          },
+        },
+      },
+    },
 };
 
 const theme = createTheme({
