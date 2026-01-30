@@ -36,6 +36,7 @@ const Chat = (props: ChatProps) => {
 							isSelf={ownName===author}
 							authorName={author}
 							date={new Date(createdAt)}
+							testId={`message`}
 						>
 							{message}
 						</Message>

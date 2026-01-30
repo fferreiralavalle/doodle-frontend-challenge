@@ -18,6 +18,7 @@ const Typebar = (props: TypebarProps) => {
 				placeholder="Message" variant='filled'
 				value={message} onChange={({ target }) => setMessage(target.value)}
 				sx={{ flex: 1 }}
+				inputProps={{ 'data-testid': 'textfield-message' }}
 			/>
 			<SubmitButton disabled={!message} variant='contained'
 				onClick={() => onSendMessage(message)}
