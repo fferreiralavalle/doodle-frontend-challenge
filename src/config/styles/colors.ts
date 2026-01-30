@@ -1,6 +1,7 @@
 const COLORS = {
 	black: '#000',
-	grey: 'rgb(112 112 112)',
+	grey: '#707070',
+	yellow: '#faf0be',
 }
 
 export default COLORS;
