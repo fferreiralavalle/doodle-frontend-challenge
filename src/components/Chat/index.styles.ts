@@ -15,14 +15,16 @@ export const MessagesContainer = styled(Container)(({ theme }) => ({
 	display: 'flex',
 	flexDirection: 'column',
     alignItems: 'flex-start',
+	justifyContent: 'flex-end',
 	padding: theme.spacing(2, 3),
 	gap: theme.spacing(2),
 	flex: 1,
 	maxWidth: 640,
 }));
 
-export const MessagesBox = styled(Container)(({ theme }) => ({
+export const MessagesBox = styled(Box)(({ theme }) => ({
 	display: 'flex',
+	width: '100%',
 	flexDirection: 'column',
     alignItems: 'flex-start',
 	padding: theme.spacing(2, 3),
