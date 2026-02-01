@@ -1,75 +1,36 @@
-# React + TypeScript + Vite
+# Doodle Frontend Challenge - Facundo Ferreira
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to my implementation of this challenge. This project was done using VITE with VITEST, Typescript and React.
 
-Currently, two official plugins are available:
+## How to run it
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+After cloning this project, you will need to
+1. Download and run the backend project [here](https://github.com/DoodleScheduling/frontend-challenge-chat-api).
+2. Run `npm i` on this project to install every dependency.
+3. Create an `.env` file and fill it with your backend api token. Use the `.env.example` as a guide.
+4. Run `npm run dev` to get he frontend going.
 
-## React Compiler
+To run the tests, simply use `npm run test`.
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
 
-Note: This will impact Vite dev & build performances.
+## Features
+### Retrieve Messages
+This project allows you to visualize messages from the backend connecting to an API.
+<img src="src/assets/readme/Messages.png" width="600" alt="chat" />
 
-## Expanding the ESLint configuration
+### Send Messages
+You can also send your own messages. Currently your messages will use the name "You". Since the challange didn't ask for a way to set your name. A way of expanding on this would be to assign the messages to a user ID and make the user login.
+<img src="src/assets/readme/Own_messages.png" width="600" alt="Own_messages" />
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Error Display
+If you try to send a message and it fails, you will be notified.
+<img src="src/assets/readme/Message_without_connection.png" width="600" alt="Message_without_connection" />
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+If it fails to retrieve messages at any time, you will also be notified
+<img src="src/assets/readme/Failed_to_fetch.png" width="600" alt="Failed_to_fetch" />
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Styling
+I used Material UI for styling. This allowed me to save time by using their component and also easily modify existing ones.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Why Vitest?
+Vitest is ideal for quick projects. It extremely well optimized and can be built upon in the future. Next.js takes more time to set up, which unfortunately meant it wasn't fit for this quick project.
