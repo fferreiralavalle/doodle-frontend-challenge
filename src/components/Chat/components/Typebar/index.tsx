@@ -20,7 +20,7 @@ const Typebar = (props: TypebarProps) => {
 	}
 
 	return (
-		<TypebarContainer>
+		<TypebarContainer onSubmit={() => handleSendMessage(message)}>
 			<TextField
 				placeholder="Message" variant='filled'
 				value={message} onChange={({ target }) => setMessage(target.value)}
@@ -29,6 +29,7 @@ const Typebar = (props: TypebarProps) => {
 			/>
 			<SubmitButton disabled={!message} variant='contained'
 				onClick={() => handleSendMessage(message)}
+				type='submit'
 			>
 				Send
 			</SubmitButton>

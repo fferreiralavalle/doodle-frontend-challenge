@@ -1,8 +1,8 @@
-import { Box, Button } from '@mui/material';
+import { Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import COLORS from '../../../../config/styles/colors';
 
-export const TypebarContainer = styled(Box)(({ theme }) => ({
+export const TypebarContainer = styled('form')(({ theme }) => ({
 	display: 'flex',
 	justifyContent: 'center',
     alignItems: 'center',
