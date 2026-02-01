@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient, type InfiniteData } from "react-query"
+import { useMutation, useQueryClient, type InfiniteData } from "@tanstack/react-query"
 import type { IPostMessage } from "../services/types/messaage"
 import postMessage from "../services/apis/messages/postMessage"
 import type IMessage from "../services/types/messaage"
@@ -12,7 +12,7 @@ const usePostMessages = (props: IUsePostMessagesProps = {}) => {
 	const { onError } = props;
 	const queryClient = useQueryClient()
 
-	const { data, isLoading, error, mutate, mutateAsync } = useMutation({
+	const { data, isPending, error, mutate, mutateAsync } = useMutation({
 		mutationFn: ({ message }: { message: IPostMessage}) => postMessage(message),
 		onError: (error, { message }) => onError && onError(error, message),
 		onSuccess: (newMessage) => {
@@ -43,7 +43,7 @@ const usePostMessages = (props: IUsePostMessagesProps = {}) => {
 		data,
 		post: handleSendMessage,
 		postAsync: handleSendMessageAsync,
-		isLoading,
+		isLoading: isPending,
 		error,
 	}
 }

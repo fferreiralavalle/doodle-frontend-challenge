@@ -1,4 +1,4 @@
-import { useInfiniteQuery } from "react-query"
+import { useInfiniteQuery } from "@tanstack/react-query"
 import fetchMessages from "../services/apis/messages/getMessages"
 import type IMessage from "../services/types/messaage"
 import { useMemo } from "react"
@@ -13,6 +13,7 @@ const useGetMessages = () => {
 			return new Date(oldest.createdAt)
  		 },
 		 refetchOnWindowFocus: false,
+		 initialPageParam: new Date()
 	})
 
 	const messages = useMemo(() => {
