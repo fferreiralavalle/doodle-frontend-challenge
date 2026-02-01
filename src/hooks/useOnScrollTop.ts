@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef } from "react"
 
-const useOnScrollTop = ({ onReachTop, loading }: { onReachTop?: () => void, loading?: boolean }) => {
+const useOnScrollTop = ({ onReachTop, loading, error }: { onReachTop?: () => void, loading?: boolean, error?: boolean }) => {
 	const containerRef = useRef<HTMLDivElement | null>(null)
 	// Stop the onReachTop event from triggering multiple times
 	const reachedTop = useRef(false)
@@ -20,14 +20,14 @@ const useOnScrollTop = ({ onReachTop, loading }: { onReachTop?: () => void, load
 	useEffect(() => {
 		// Once loading is done, allow reach to to retrigger
 		if (!loading) {
-			if (isTopReached() && onReachTop){
+			if (isTopReached() && onReachTop && !error){
 				onReachTop();
 			}
 			else {
 				reachedTop.current = false
 			}
 		}
-	}, [loading, onReachTop, isTopReached])
+	}, [loading, onReachTop, isTopReached, error])
 
 	useEffect(() => {
 		const el = containerRef.current

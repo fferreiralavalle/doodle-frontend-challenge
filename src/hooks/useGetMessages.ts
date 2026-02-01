@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from "react-query"
-import fetchMessages from "../services/apis/getMessages"
+import fetchMessages from "../services/apis/messages/getMessages"
 import type IMessage from "../services/types/messaage"
 import { useMemo } from "react"
 

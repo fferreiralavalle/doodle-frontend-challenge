@@ -29,7 +29,7 @@ interface ChatProps {
 const Chat = (props: ChatProps) => {
 	const bottomRef = useRef<HTMLDivElement | null>(null)
 	const { messages, ownName, loadingMessages, onSendMessage, onLoadMore, messageSentError, errorFetching } = props;
-	const { containerRef } = useOnScrollTop({ onReachTop: onLoadMore, loading: loadingMessages })
+	const { containerRef } = useOnScrollTop({ onReachTop: onLoadMore, loading: loadingMessages, error: errorFetching })
 	// used for forcing the scroll to start at the bottom after fetching messages
 	const hasScrollbar = useRef<boolean | null>(false);
 
@@ -54,7 +54,7 @@ const Chat = (props: ChatProps) => {
 		<ChatContainer>
 			<MessagesBox ref={containerRef}>
 				{loadingMessages && <Progress color="primary" size={40}/>}
-				{errorFetching && <FetchError severity="error">Failed to retrieve messages.</FetchError>}
+				{errorFetching && !loadingMessages && <FetchError severity="error">Failed to retrieve messages.</FetchError>}
 				<MessagesContainer>
 					{messages?.map(({ author, createdAt, message, _id }) => (
 						<Message

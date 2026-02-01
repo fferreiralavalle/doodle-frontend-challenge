@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient, type InfiniteData } from "react-query"
 import type { IPostMessage } from "../services/types/messaage"
-import postMessage from "../services/apis/postMessage"
+import postMessage from "../services/apis/messages/postMessage"
 import type IMessage from "../services/types/messaage"
 
 

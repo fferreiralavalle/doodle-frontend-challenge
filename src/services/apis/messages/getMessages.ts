@@ -1,5 +1,5 @@
-import { MESSAGE_URL } from "../../config/Urls";
-import getMessageApiKey from "../../utils/getMessageApiKey";
+import { MESSAGE_URL } from "../../../config/Urls";
+import getMessageApiKey from "../../../utils/getMessageApiKey";
 
 interface IFetchMessageParam {
 	limit?: number
