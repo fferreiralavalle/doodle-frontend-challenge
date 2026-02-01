@@ -8,14 +8,15 @@ interface MessageProps {
   children: ReactNode;
   authorName: string;
   isSelf?: boolean;
+  testId?: string;
 }
 
 const Message = (props: MessageProps) => {
-	const { date, children, authorName, isSelf } = props;
+	const { date, children, authorName, isSelf, testId = "message" } = props;
 
 	const formattedDate = formatDate(date);
 
-	return <MessageStyled isSelf={isSelf}>
+	return <MessageStyled isSelf={isSelf} data-testid={testId}>
 		{!isSelf && <Typography variant='body2' textAlign={'left'} color='secondary'>{authorName}</Typography>}
 		<Typography variant="body1" textAlign={'left'}>{children}</Typography>
 		<Typography variant='body2' textAlign={isSelf ? 'right' : 'left'} color='secondary'>
