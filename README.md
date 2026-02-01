@@ -34,6 +34,12 @@ If it fails to retrieve messages at any time, you will also be notified
 
 <img src="src/assets/readme/Failed_to_fetch.png" width="600" alt="Failed_to_fetch" />
 
+### Progressive search
+When you reach the top of the chat, the frontend ask the backend for the next 10 messages instead of asking for every message again. This makes it more efficent when handling large amount of messages, and also saves bandwith.
+
+### No re-fetch after sending a sucessful message
+If the message sent is sucessfully posted, the frontend will add the message locally to the chat instead of asking for the whole list again. Making it faster and more efficent.
+
 ## Styling
 I used [Material UI](https://mui.com/material-ui/getting-started/) for styling. This allowed me to save time by using their component and also easily modify existing ones.
 
