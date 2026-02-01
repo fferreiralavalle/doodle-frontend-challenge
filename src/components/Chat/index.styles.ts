@@ -1,4 +1,4 @@
-import { Box, Container } from '@mui/material';
+import { Box, CircularProgress, Container } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import background from "src/assets/backgrounds/chat-bg.png";
 
@@ -9,6 +9,7 @@ export const ChatContainer = styled(Box)(() => ({
 	width: '100%',
 	height: '100%',
 	padding: '0px !important',
+	position: 'relative'
 }));
 
 export const MessagesContainer = styled(Container)(({ theme }) => ({
@@ -22,16 +23,17 @@ export const MessagesContainer = styled(Container)(({ theme }) => ({
 	maxWidth: 640,
 }));
 
-export const MessagesBox = styled(Box)(({ theme }) => ({
+export const MessagesBox = styled(Box)(() => ({
 	display: 'flex',
 	width: '100%',
 	flexDirection: 'column',
-    alignItems: 'flex-start',
-	padding: theme.spacing(2, 3),
-	gap: theme.spacing(2),
-	flex: 1,
+    alignItems: 'center',
 	overflowY: 'auto',
+	flex: 1,
 	backgroundImage: `url(${background})`,
   	backgroundSize: 'cover',
   	backgroundPosition: 'center',
 }));
+
+export const Progress = styled(CircularProgress)(() => ({
+}))

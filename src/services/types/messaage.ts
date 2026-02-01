@@ -4,3 +4,8 @@ export default interface IMessage {
 	createdAt: Date;
 	_id: string;
 }
+
+export interface IPostMessage {
+	message: string;
+	author: string;
+}
