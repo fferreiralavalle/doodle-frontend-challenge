@@ -1,5 +1,5 @@
 import "react";
-import { SubmitButton, TypebarContainer } from "./index.styles";
+import { Content, SubmitButton, TypebarContainer } from "./index.styles";
 import { TextField } from "@mui/material";
 import { useState } from "react";
 
@@ -19,20 +19,28 @@ const Typebar = (props: TypebarProps) => {
 		}
 	}
 
+	const handleSubmit = (e: React.SubmitEvent) => {
+		 e.preventDefault();
+		 handleSendMessage(message)
+	}
+
 	return (
-		<TypebarContainer onSubmit={() => handleSendMessage(message)}>
-			<TextField
-				placeholder="Message" variant='filled'
-				value={message} onChange={({ target }) => setMessage(target.value)}
-				sx={{ flex: 1 }}
-				inputProps={{ 'data-testid': 'textfield-message' }}
-			/>
-			<SubmitButton disabled={!message} variant='contained'
-				onClick={() => handleSendMessage(message)}
-				type='submit'
-			>
-				Send
-			</SubmitButton>
+		<TypebarContainer onSubmit={handleSubmit}>
+			<Content>
+				<TextField
+					placeholder="Message" variant='filled'
+					value={message} onChange={({ target }) => setMessage(target.value)}
+					sx={{ flex: 1 }}
+					inputProps={{ 'data-testid': 'textfield-message' }}
+				/>
+				<SubmitButton
+					disabled={!message}
+					variant='contained'
+					type="submit"
+				>
+					Send
+				</SubmitButton>
+			</Content>
 		</TypebarContainer>
 	)
 }

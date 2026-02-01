@@ -1,6 +1,7 @@
-import { Alert, Box, CircularProgress, Container } from '@mui/material';
+import { Alert, Box, CircularProgress } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import background from "src/assets/backgrounds/chat-bg.png";
+import WIDTHS from '../../config/styles/widths';
 
 export const ChatContainer = styled(Box)(() => ({
 	display: 'flex',
@@ -12,7 +13,7 @@ export const ChatContainer = styled(Box)(() => ({
 	position: 'relative'
 }));
 
-export const MessagesContainer = styled(Container)(({ theme }) => ({
+export const MessagesContainer = styled(Box)(({ theme }) => ({
 	display: 'flex',
 	flexDirection: 'column',
     alignItems: 'flex-start',
@@ -20,7 +21,8 @@ export const MessagesContainer = styled(Container)(({ theme }) => ({
 	padding: theme.spacing(2, 3),
 	gap: theme.spacing(2),
 	flex: 1,
-	maxWidth: 640,
+	maxWidth: WIDTHS.CHAT_WIDTH,
+	width: '100%',
 }));
 
 export const MessagesBox = styled(Box)(() => ({
