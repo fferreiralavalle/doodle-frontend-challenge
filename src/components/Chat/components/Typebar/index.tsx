@@ -12,6 +12,13 @@ const Typebar = (props: TypebarProps) => {
 	const { onSendMessage } = props;
 	const [message, setMessage] = useState('');
 
+	const handleSendMessage = (val: string) => {
+		if (onSendMessage){
+			setMessage('');
+			onSendMessage(val)
+		}
+	}
+
 	return (
 		<TypebarContainer>
 			<TextField
@@ -21,7 +28,7 @@ const Typebar = (props: TypebarProps) => {
 				inputProps={{ 'data-testid': 'textfield-message' }}
 			/>
 			<SubmitButton disabled={!message} variant='contained'
-				onClick={() => onSendMessage(message)}
+				onClick={() => handleSendMessage(message)}
 			>
 				Send
 			</SubmitButton>

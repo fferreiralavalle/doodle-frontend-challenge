@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Container } from '@mui/material';
+import { Alert, Box, CircularProgress, Container } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import background from "src/assets/backgrounds/chat-bg.png";
 
@@ -35,5 +35,11 @@ export const MessagesBox = styled(Box)(() => ({
   	backgroundPosition: 'center',
 }));
 
-export const Progress = styled(CircularProgress)(() => ({
+export const FetchError = styled(Alert)(({ theme }) => ({
+	position: 'absolute',
+	top: theme.spacing(2),
+}))
+
+export const Progress = styled(CircularProgress)(({ theme }) => ({
+	marginTop: theme.spacing(2),
 }))

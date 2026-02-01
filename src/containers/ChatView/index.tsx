@@ -3,7 +3,7 @@ import useMessages from '../../hooks/useMessages';
 import Chat from '../../components/Chat';
 
 function ChatView() {
-  const { messages, isLoading, error, fetchNext, postMessage } = useMessages();
+  const { messages, isLoading, lastErrorMessage, error, fetchNext, postMessage } = useMessages();
 
   return (
     <Chat
@@ -11,6 +11,8 @@ function ChatView() {
 		onSendMessage={postMessage}
 		loadingMessages={isLoading}
 		onLoadMore={fetchNext}
+		messageSentError={lastErrorMessage}
+		errorFetching={!!error}
 	/>
   )
 }

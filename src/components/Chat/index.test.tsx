@@ -75,4 +75,39 @@ describe('Chat', () => {
       message: 'Hello from test',
     })
   })
+
+  
+  it("shows loading indicator", () => {
+    render(
+      <Chat messages={[]} ownName="Bob" loadingMessages onSendMessage={vi.fn()} />
+    )
+
+    expect(screen.getByRole("progressbar")).toBeInTheDocument()
+  })
+
+  it("shows fetch error", () => {
+    render(
+      <Chat messages={[]} ownName="Bob" errorFetching onSendMessage={vi.fn()} />
+    )
+
+    expect(
+      screen.getByText("Failed to retrieve messages.")
+    ).toBeInTheDocument()
+  })
+
+  it("shows message send error state", () => {
+    render(
+      <Chat
+        messages={[]}
+        ownName="Bob"
+        onSendMessage={vi.fn()}
+        messageSentError={{ author: "Bob", message: "Oops" }}
+      />
+    )
+
+    expect(screen.getByText("Oops")).toBeInTheDocument()
+    expect(
+      screen.getByText("Failed to send message. Try again later.")
+    ).toBeInTheDocument()
+  })
 })

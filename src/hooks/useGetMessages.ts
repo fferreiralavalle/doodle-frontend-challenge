@@ -4,7 +4,7 @@ import type IMessage from "../services/types/messaage"
 import { useMemo } from "react"
 
 const useGetMessages = () => {
-	const { data, isLoading, error, fetchNextPage } = useInfiniteQuery({
+	const { data, error, fetchNextPage, isFetching, isLoading, isError } = useInfiniteQuery({
 		queryKey: ['messages'],
 		queryFn: ({ pageParam }) => fetchMessages({ before: pageParam }),
 		getNextPageParam: (lastPage) => {
@@ -26,8 +26,8 @@ const useGetMessages = () => {
 		messages: messages as IMessage[],
 		pages: data?.pages || [],
 		fetchNext: fetchNextPage,
-		isLoading,
-		error,
+		isLoading: isFetching || isLoading,
+		error: isError || error,
 	}
 }
 

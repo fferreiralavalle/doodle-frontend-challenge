@@ -1,10 +1,11 @@
 import "react";
-import { ChatContainer, MessagesBox, MessagesContainer, Progress } from "./index.styles";
+import { ChatContainer, MessagesBox, MessagesContainer, FetchError, Progress } from "./index.styles";
 import type IMessage from "../../services/types/messaage";
 import Message from "../Message";
 import Typebar from "./components/Typebar";
 import useOnScrollTop from "../../hooks/useOnScrollTop";
 import { useEffect, useRef } from "react";
+import { Alert, Box } from "@mui/material";
 
 export interface MessageSent {
 	message: string;
@@ -16,17 +17,21 @@ interface ChatProps {
 	/** Used for differenciating between own and other people's messages */
 	ownName: string;
 	/** true if messages are being loaded */
-	loadingMessages: boolean;
+	loadingMessages?: boolean;
+	messageSentError?: MessageSent;
+	errorFetching?: boolean;
 	/** Called whenever the user sends a new message, author will be ownName */
 	onSendMessage(messageSent: MessageSent): void; 
 	/** Called whenever the top of the messages window is reached */
-	onLoadMore(): void;
+	onLoadMore?: () => void;
 }
 
 const Chat = (props: ChatProps) => {
 	const bottomRef = useRef<HTMLDivElement | null>(null)
-	const { messages, ownName, loadingMessages, onSendMessage, onLoadMore } = props;
+	const { messages, ownName, loadingMessages, onSendMessage, onLoadMore, messageSentError, errorFetching } = props;
 	const { containerRef } = useOnScrollTop({ onReachTop: onLoadMore, loading: loadingMessages })
+	// used for forcing the scroll to start at the bottom after fetching messages
+	const hasScrollbar = useRef<boolean | null>(false);
 
 	const handleSendMessage = (message: string) => {
 		onSendMessage({
@@ -36,15 +41,20 @@ const Chat = (props: ChatProps) => {
 	}
 
 	useEffect(() => {
-		// Scrolls to bottom after first messages are loaded
-		if (messages.length <= 10 && containerRef?.current)
+		// Check if container has a scrollbar active
+		const scrollbar = containerRef.current ? containerRef.current.scrollHeight > containerRef.current.clientHeight : false;
+		if (messages.length > 0 && bottomRef.current && !hasScrollbar.current && scrollbar){
+			// Scrolls to bottom after scrollbar first appears
 			bottomRef.current?.scrollIntoView();
-	}, [messages, containerRef])
+			hasScrollbar.current = true;
+		}
+	}, [messages, bottomRef, containerRef, hasScrollbar])
 
 	return (
 		<ChatContainer>
-			<MessagesBox  ref={containerRef}>
-				{loadingMessages && <Progress color="primary" size='sm'/>}
+			<MessagesBox ref={containerRef}>
+				{loadingMessages && <Progress color="primary" size={40}/>}
+				{errorFetching && <FetchError severity="error">Failed to retrieve messages.</FetchError>}
 				<MessagesContainer>
 					{messages?.map(({ author, createdAt, message, _id }) => (
 						<Message
@@ -57,6 +67,13 @@ const Chat = (props: ChatProps) => {
 							{message}
 						</Message>
 					))}
+					{messageSentError && <Box alignSelf={'end'} display={'flex'} flexDirection={'column'} gap={1}>
+						<Message date={new Date()} authorName={messageSentError.author} isSelf>
+							{messageSentError.message}
+						</Message>
+						<Alert severity="error">Failed to send message. Try again later.</Alert>
+					</Box>
+					}
 					<div ref={bottomRef} />
 				</MessagesContainer>
 			</MessagesBox>
